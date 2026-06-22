@@ -5,7 +5,7 @@ services:
     plan: starter
     buildCommand: npm install
     startCommand: npm start
-    root: server
+    rootDir: server
     envVars:
       - key: NODE_ENV
         value: production
@@ -33,7 +33,7 @@ services:
           property: gmailPassword
       - key: CLIENT_ORIGIN
         value: https://courtyard-pi.vercel.app
-      - key: CLOUDINARY_NAME
+      - key: CLOUDINARY_CLOUD_NAME
         value: your_cloudinary_name
       - key: CLOUDINARY_API_KEY
         value: your_cloudinary_key
