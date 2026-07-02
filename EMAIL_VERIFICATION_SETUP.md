@@ -56,7 +56,7 @@ npm install nodemailer
 2. Frontend sends POST request to `/api/auth/verify-email-send`
 3. Backend:
    - Generates JWT verification token (with 15-minute expiry)
-   - Stores token in `email_verifications` Firestore collection
+   - Stores token in the `email_verifications` MySQL table
    - Sends email with verification link to user
 4. User receives email and clicks verification link
 5. Frontend redirects to `/verify-email?token=<token>`
@@ -153,7 +153,7 @@ Response:
    - Prevents duplicate email registrations
 
 4. **Database Security**
-   - Verification tokens stored in separate Firestore collection
+   - Verification tokens stored in the MySQL `email_verifications` table
    - User verification status tracked in `emailVerified` field
    - Verified timestamp stored for audit purposes
 

@@ -251,7 +251,7 @@ export const UserHome = () => {
                     ) : null}
                   </div>
                 )) : (
-                  <p className="text-sm text-gray-500">Reviews will appear here once they are stored in Firestore.</p>
+                  <p className="text-sm text-gray-500">Reviews will appear here once they are published.</p>
                 )}
               </div>
             </GlassCard>

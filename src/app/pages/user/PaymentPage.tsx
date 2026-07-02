@@ -243,7 +243,7 @@ export const PaymentPage = () => {
             <div className="space-y-3 mb-6">
               <div>
                 <p className="text-xs md:text-sm text-gray-600">Court</p>
-                <p className="font-medium text-sm md:text-base">{venueName || 'Loading venue name from Firestore...'}</p>
+                <p className="font-medium text-sm md:text-base">{venueName || 'Loading venue name...'}</p>
               </div>
               
               <div>

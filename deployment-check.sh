@@ -64,15 +64,6 @@ else
 fi
 echo ""
 
-# Check Firebase config
-echo "✓ Checking Firebase configuration..."
-if grep -q "VITE_FIREBASE_API_KEY" .env.local 2>/dev/null; then
-  echo "  ✅ Frontend Firebase config detected"
-fi
-
-if grep -q "FIREBASE_PROJECT_ID" server/.env 2>/dev/null; then
-  echo "  ✅ Backend Firebase config detected"
-fi
 echo ""
 
 echo "==========================================="
@@ -82,7 +73,7 @@ echo "Before deploying, ensure:"
 echo "  [ ] All code is committed to Git"
 echo "  [ ] package.json versions are updated"
 echo "  [ ] DEPLOYMENT_RENDER_VERCEL.md has been reviewed"
-echo "  [ ] Firebase credentials are ready"
+echo "  [ ] MySQL database credentials are ready"
 echo "  [ ] Gmail app password is generated"
 echo "  [ ] Render account created and verified"
 echo "  [ ] Vercel account created and verified"

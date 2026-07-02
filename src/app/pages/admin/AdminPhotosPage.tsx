@@ -121,7 +121,7 @@ const uploadImageToCloudinary = async (dataUrl: string, fileName: string) => {
   return payload.upload.secureUrl as string;
 };
 
-const saveGalleryToFirestore = async (gallery: GalleryItem[]) => {
+const saveGallery = async (gallery: GalleryItem[]) => {
   const token = await getAuthAccessToken();
   if (!token) {
     throw new Error('Please sign in again to save photos');
@@ -250,7 +250,7 @@ export const AdminPhotosPage = () => {
         throw new Error('Gallery is too large to save. Remove or compress some images.');
       }
 
-      const savedGallery = await saveGalleryToFirestore(nextGallery);
+      const savedGallery = await saveGallery(nextGallery);
       setGallery(savedGallery);
       window.dispatchEvent(new CustomEvent('tcy:settings-updated'));
       try { window.localStorage.setItem('tcy:settings-updated', String(Date.now())); } catch {};
@@ -291,7 +291,7 @@ export const AdminPhotosPage = () => {
 
     try {
       const nextGallery = gallery.filter((_, itemIndex) => itemIndex !== deleteIndex);
-      const savedGallery = await saveGalleryToFirestore(nextGallery);
+      const savedGallery = await saveGallery(nextGallery);
       setGallery(savedGallery);
       window.dispatchEvent(new CustomEvent('tcy:settings-updated'));
       try { window.localStorage.setItem('tcy:settings-updated', String(Date.now())); } catch {};

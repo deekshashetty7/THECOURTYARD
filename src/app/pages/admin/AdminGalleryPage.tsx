@@ -142,7 +142,7 @@ const uploadImageToCloudinary = async (dataUrl: string, fileName: string) => {
   return payload.upload.secureUrl as string;
 };
 
-const saveGalleryToFirestore = async (gallery: GalleryItem[]) => {
+const saveGallery = async (gallery: GalleryItem[]) => {
   const token = await getAuthAccessToken();
   if (!token) {
     throw new Error('Please sign in again to save gallery changes');
@@ -170,7 +170,7 @@ const saveGalleryToFirestore = async (gallery: GalleryItem[]) => {
 
   if (!response.ok) {
     const statusDetail = `HTTP ${response.status}${response.statusText ? ` ${response.statusText}` : ''}`;
-    const serverMessage = payload?.error?.message || rawText || 'Unable to save gallery to Firestore';
+    const serverMessage = payload?.error?.message || rawText || 'Unable to save gallery';
     throw new Error(`${statusDetail}: ${serverMessage}`);
   }
 
@@ -265,7 +265,7 @@ export const AdminGalleryPage = () => {
     const rawDataUrl = await readFileAsDataUrl(file);
     let dataUrl = rawDataUrl;
 
-    // Resize/compress local uploads to keep settings payload within Firestore limits.
+    // Resize/compress local uploads to keep settings payload within server limits.
     if (estimateBytes(rawDataUrl) > MAX_IMAGE_BYTES) {
       dataUrl = await optimizeImageDataUrl(rawDataUrl);
     }
@@ -331,7 +331,7 @@ export const AdminGalleryPage = () => {
         throw new Error('Gallery is too large to save. Remove or compress some images.');
       }
 
-      const savedGallery = await saveGalleryToFirestore(nextGallery);
+      const savedGallery = await saveGallery(nextGallery);
       persistGallery(savedGallery);
       window.dispatchEvent(new CustomEvent('tcy:settings-updated'));
       try { window.localStorage.setItem('tcy:settings-updated', String(Date.now())); } catch {};
